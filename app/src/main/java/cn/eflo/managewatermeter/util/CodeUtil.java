@@ -52,6 +52,13 @@ public class CodeUtil {
         return out;
     }
 
+    static {
+        System.loadLibrary("native-lib");
+    }
+
+    public native String decode(String input);
+    public native String encode(String input);
+
 
     public static void main(String[] args) {
         System.out.println(getEncodedMD5("管理员"));
