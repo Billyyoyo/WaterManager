@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.util;
+package cn.eflo.managewatermeter.util;
 
 import android.content.Context;
 import android.text.format.DateFormat;

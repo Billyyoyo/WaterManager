@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.util;
+package cn.eflo.managewatermeter.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -53,11 +53,11 @@ public class CodeUtil {
     }
 
     static {
-        System.loadLibrary("native-lib");
+        System.loadLibrary("crypto");
     }
 
-    public native String decode(String input);
-    public native String encode(String input);
+    public static native String decode(String input);
+    public static native String encode(String input);
 
 
     public static void main(String[] args) {

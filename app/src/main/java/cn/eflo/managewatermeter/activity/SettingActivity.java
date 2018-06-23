@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.activity;
+package cn.eflo.managewatermeter.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import butterknife.ButterKnife;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.fragment.SettingFragment;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.fragment.SettingFragment;
 
 public class SettingActivity extends DefaultActivity {
 

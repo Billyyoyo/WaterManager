@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.fragment;
+package cn.eflo.managewatermeter.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -15,9 +15,9 @@ import java.util.concurrent.CompletableFuture;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.dao.RemoteDao;
-import cn.e_flo.managewatermeter.model.RemoteDBParams;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.dao.RemoteDao;
+import cn.eflo.managewatermeter.model.RemoteDBParams;
 
 public class SettingFragment extends DefaultFragment {
 

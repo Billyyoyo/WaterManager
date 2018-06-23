@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter;
+package cn.eflo.managewatermeter;
 
 import org.junit.Test;
 

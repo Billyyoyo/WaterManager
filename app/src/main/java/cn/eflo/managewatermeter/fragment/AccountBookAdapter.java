@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.fragment;
+package cn.eflo.managewatermeter.fragment;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -14,9 +14,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.activity.InfoActivity;
-import cn.e_flo.managewatermeter.model.AccountBook;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.activity.InfoActivity;
+import cn.eflo.managewatermeter.model.AccountBook;
 
 public class AccountBookAdapter extends RecyclerView.Adapter<AccountBookAdapter.ViewHolder> {
 

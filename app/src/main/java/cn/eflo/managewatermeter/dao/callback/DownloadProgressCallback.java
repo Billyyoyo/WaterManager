@@ -1,9 +1,9 @@
-package cn.e_flo.managewatermeter.dao.callback;
+package cn.eflo.managewatermeter.dao.callback;
 
 import java.util.List;
 
-import cn.e_flo.managewatermeter.model.AccountBook;
-import cn.e_flo.managewatermeter.model.RecordInfo;
+import cn.eflo.managewatermeter.model.AccountBook;
+import cn.eflo.managewatermeter.model.RecordInfo;
 
 public interface DownloadProgressCallback {
 

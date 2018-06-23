@@ -1,8 +1,7 @@
-package cn.e_flo.managewatermeter.dao;
+package cn.eflo.managewatermeter.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import java.nio.charset.Charset;
 import java.sql.Connection;
@@ -15,19 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import cn.e_flo.managewatermeter.dao.callback.AccountBooksCallback;
-import cn.e_flo.managewatermeter.dao.callback.DownloadDataCallback;
-import cn.e_flo.managewatermeter.dao.callback.DownloadProgressCallback;
-import cn.e_flo.managewatermeter.dao.callback.OperatorCallback;
-import cn.e_flo.managewatermeter.dao.callback.RecordInfoCallback;
-import cn.e_flo.managewatermeter.dao.callback.UploadDataCallback;
-import cn.e_flo.managewatermeter.dao.callback.UploadProgressCallback;
-import cn.e_flo.managewatermeter.model.AccountBook;
-import cn.e_flo.managewatermeter.model.Operator;
-import cn.e_flo.managewatermeter.model.RecordInfo;
-import cn.e_flo.managewatermeter.model.RemoteDBParams;
-import cn.e_flo.managewatermeter.util.Util;
-import cn.e_flo.managewatermeter.util.WLog;
+import cn.eflo.managewatermeter.dao.callback.AccountBooksCallback;
+import cn.eflo.managewatermeter.dao.callback.DownloadDataCallback;
+import cn.eflo.managewatermeter.dao.callback.DownloadProgressCallback;
+import cn.eflo.managewatermeter.dao.callback.OperatorCallback;
+import cn.eflo.managewatermeter.dao.callback.RecordInfoCallback;
+import cn.eflo.managewatermeter.dao.callback.UploadDataCallback;
+import cn.eflo.managewatermeter.dao.callback.UploadProgressCallback;
+import cn.eflo.managewatermeter.model.AccountBook;
+import cn.eflo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.model.RecordInfo;
+import cn.eflo.managewatermeter.model.RemoteDBParams;
+import cn.eflo.managewatermeter.util.Util;
+import cn.eflo.managewatermeter.util.WLog;
 
 public class RemoteDao {
 
@@ -48,7 +47,7 @@ public class RemoteDao {
                     "jdbc:mysql://" + paras.address + ":" + paras.port + "/" + paras.dbName //+ "?useUnicode=true&characterEncoding=utf-8"
                     , paras.root
                     , paras.password);
-            Log.i(TAG, "连接成功");
+            WLog.i(TAG, "连接成功");
             return true;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -61,7 +60,7 @@ public class RemoteDao {
     public void disconnect() {
         try {
             connection.close();
-            Log.i(TAG, "连接断开");
+            WLog.i(TAG, "连接断开");
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -86,7 +85,7 @@ public class RemoteDao {
                     result.id = rs.getString("V_LoginID");
                     result.name = name;
                     result.password = rs.getString("V_Password");
-                    Log.i(TAG, result + " : " + rs.getString("V_LoginID") + " - " + rs.getString("V_Password"));
+                    WLog.i(TAG, result + " : " + rs.getString("V_LoginID") + " - " + rs.getString("V_Password"));
                 }
 
                 rs.close();

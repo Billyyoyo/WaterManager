@@ -34,7 +34,7 @@
  *
  */
 
-package cn.e_flo.managewatermeter.util;
+package cn.eflo.managewatermeter.util;
 
 
 /** The TimeSpanUnit defines a standard set of units to be used with the TimeSpan

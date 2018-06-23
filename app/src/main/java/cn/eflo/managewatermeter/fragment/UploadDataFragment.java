@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.fragment;
+package cn.eflo.managewatermeter.fragment;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -13,12 +13,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.dao.LocalDao;
-import cn.e_flo.managewatermeter.dao.RemoteDao;
-import cn.e_flo.managewatermeter.event.DownloadCompleteEvent;
-import cn.e_flo.managewatermeter.event.EventBus;
-import cn.e_flo.managewatermeter.model.RecordInfo;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.dao.LocalDao;
+import cn.eflo.managewatermeter.dao.RemoteDao;
+import cn.eflo.managewatermeter.event.DownloadCompleteEvent;
+import cn.eflo.managewatermeter.event.EventBus;
+import cn.eflo.managewatermeter.model.RecordInfo;
 
 public class UploadDataFragment extends DefaultFragment {
 

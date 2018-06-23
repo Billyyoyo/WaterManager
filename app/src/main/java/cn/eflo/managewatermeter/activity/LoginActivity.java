@@ -1,6 +1,7 @@
-package cn.e_flo.managewatermeter.activity;
+package cn.eflo.managewatermeter.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -10,10 +11,13 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.dao.LocalDao;
-import cn.e_flo.managewatermeter.dao.RemoteDao;
-import cn.e_flo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.dao.LocalDao;
+import cn.eflo.managewatermeter.dao.RemoteDao;
+import cn.eflo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.util.CodeUtil;
+import cn.eflo.managewatermeter.util.Constant;
+import cn.eflo.managewatermeter.util.SystemUtil;
 
 public class LoginActivity extends DefaultActivity {
 
@@ -31,6 +35,9 @@ public class LoginActivity extends DefaultActivity {
         }
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            SystemUtil.requestInitPermission(this);
+        }
     }
 
     @Override
@@ -43,22 +50,32 @@ public class LoginActivity extends DefaultActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == Constant.INTENT_REQUEST_INIT_PERMISSION) {
+            SystemUtil.requestInitPermission(this);
+        }
+    }
+
     @OnClick(R.id.LoginButton)
     public void toLogin() {
         if (TextUtils.isEmpty(usernameBox.getText().toString())) {
             new AlertDialog.Builder(this).setTitle("输入错误").setMessage("请输入登录名").show();
-            return;
+            throw new RuntimeException("adsfadsfa");
+//            return;
         }
         if (TextUtils.isEmpty(passwordBox.getText().toString())) {
             new AlertDialog.Builder(this).setTitle("输入错误").setMessage("请输入登录密码").show();
-            return;
+            throw new RuntimeException("adsfadsfa");
+//            return;
         }
         RemoteDao dao = new RemoteDao(this);
         showProgress("登录中......");
         dao.getOperator(usernameBox.getText().toString(), operator -> {
             runOnUiThread(() -> {
                 dismissProgress();
-                if (operator != null) {
+                if (operator != null && passwordBox.getText().toString().equals(CodeUtil.decode(operator.password))) {
                     LocalDao.resetOperatorsFlag();
                     operator.flag = Operator.FLAG_LOGGED;
                     operator.save();

@@ -1,6 +1,6 @@
-package cn.e_flo.managewatermeter.dao.callback;
+package cn.eflo.managewatermeter.dao.callback;
 
-import cn.e_flo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.model.Operator;
 
 public interface OperatorCallback {
 

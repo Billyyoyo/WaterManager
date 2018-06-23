@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.event;
+package cn.eflo.managewatermeter.event;
 
 import com.squareup.otto.Bus;
 

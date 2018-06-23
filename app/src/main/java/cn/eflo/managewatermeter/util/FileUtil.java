@@ -15,7 +15,7 @@
  *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cn.e_flo.managewatermeter.util;
+package cn.eflo.managewatermeter.util;
 
 import android.graphics.Bitmap;
 import android.os.Environment;

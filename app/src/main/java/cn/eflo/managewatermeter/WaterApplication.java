@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter;
+package cn.eflo.managewatermeter;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,10 +8,10 @@ import com.activeandroid.ActiveAndroid;
 
 import java.util.LinkedList;
 
-import cn.e_flo.managewatermeter.util.CrashHandler;
-import cn.e_flo.managewatermeter.util.FileUtil;
-import cn.e_flo.managewatermeter.util.SystemUtil;
-import cn.e_flo.managewatermeter.util.WLog;
+import cn.eflo.managewatermeter.util.CrashHandler;
+import cn.eflo.managewatermeter.util.FileUtil;
+import cn.eflo.managewatermeter.util.SystemUtil;
+import cn.eflo.managewatermeter.util.WLog;
 
 public class WaterApplication extends Application {
 

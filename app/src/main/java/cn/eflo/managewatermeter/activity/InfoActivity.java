@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.activity;
+package cn.eflo.managewatermeter.activity;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,10 +29,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.dao.LocalDao;
-import cn.e_flo.managewatermeter.fragment.InfoFragment;
-import cn.e_flo.managewatermeter.model.RecordInfo;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.dao.LocalDao;
+import cn.eflo.managewatermeter.fragment.InfoFragment;
+import cn.eflo.managewatermeter.model.RecordInfo;
 
 public class InfoActivity extends DefaultActivity {
 

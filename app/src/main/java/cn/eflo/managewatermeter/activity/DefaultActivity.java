@@ -1,11 +1,11 @@
-package cn.e_flo.managewatermeter.activity;
+package cn.eflo.managewatermeter.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import cn.e_flo.managewatermeter.R;
+import cn.eflo.managewatermeter.R;
 
 public class DefaultActivity extends AppCompatActivity {
 

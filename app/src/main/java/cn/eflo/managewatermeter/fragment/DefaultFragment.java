@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.fragment;
+package cn.eflo.managewatermeter.fragment;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;

@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.util;
+package cn.eflo.managewatermeter.util;
 
 import android.Manifest;
 import android.app.Activity;
@@ -61,6 +61,25 @@ import java.util.Properties;
  */
 public class SystemUtil {
 
+
+    public static boolean requestInitPermission(Activity context) {
+        List<String> permissions = new ArrayList<String>();
+        boolean result = true;
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            result = false;
+        }
+        if (permissions.size() > 0) {
+            String[] permissionArrays = new String[permissions.size()];
+            permissionArrays = permissions.toArray(permissionArrays);
+            ActivityCompat.requestPermissions(context,
+                    permissionArrays,
+                    Constant.INTENT_REQUEST_INIT_PERMISSION);
+        }
+        return result;
+    }
 
     public static boolean isLandscape(Context context) {
         Configuration cf = context.getResources().getConfiguration(); //获取设置的配置信息

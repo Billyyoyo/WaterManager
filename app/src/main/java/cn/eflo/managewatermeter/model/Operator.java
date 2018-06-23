@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.model;
+package cn.eflo.managewatermeter.model;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

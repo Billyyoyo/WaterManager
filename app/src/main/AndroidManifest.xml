@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.e_flo.managewatermeter">
+    package="cn.eflo.managewatermeter">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -25,7 +25,7 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="cn.e_flo.managewatermeter.model.RecordInfo,cn.e_flo.managewatermeter.model.Operator,cn.e_flo.managewatermeter.model.AccountBook" />
+            android:value="cn.eflo.managewatermeter.model.RecordInfo,cn.eflo.managewatermeter.model.Operator,cn.eflo.managewatermeter.model.AccountBook" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"

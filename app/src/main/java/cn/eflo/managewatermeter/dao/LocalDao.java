@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.dao;
+package cn.eflo.managewatermeter.dao;
 
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
@@ -6,9 +6,9 @@ import com.activeandroid.query.Update;
 
 import java.util.List;
 
-import cn.e_flo.managewatermeter.model.AccountBook;
-import cn.e_flo.managewatermeter.model.Operator;
-import cn.e_flo.managewatermeter.model.RecordInfo;
+import cn.eflo.managewatermeter.model.AccountBook;
+import cn.eflo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.model.RecordInfo;
 
 public class LocalDao {
 

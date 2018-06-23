@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.fragment;
+package cn.eflo.managewatermeter.fragment;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.activity.InfoActivity;
-import cn.e_flo.managewatermeter.model.RecordInfo;
-import cn.e_flo.managewatermeter.util.DateUtil;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.activity.InfoActivity;
+import cn.eflo.managewatermeter.model.RecordInfo;
+import cn.eflo.managewatermeter.util.DateUtil;
 
 /**
  * A simple {@link Fragment} subclass.

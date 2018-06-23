@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.activity;
+package cn.eflo.managewatermeter.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +20,15 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.e_flo.managewatermeter.R;
-import cn.e_flo.managewatermeter.dao.LocalDao;
-import cn.e_flo.managewatermeter.fragment.AccountBookFragment;
-import cn.e_flo.managewatermeter.fragment.DownloadDataFragment;
-import cn.e_flo.managewatermeter.fragment.SettingFragment;
-import cn.e_flo.managewatermeter.fragment.UploadDataFragment;
-import cn.e_flo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.R;
+import cn.eflo.managewatermeter.dao.LocalDao;
+import cn.eflo.managewatermeter.fragment.AccountBookFragment;
+import cn.eflo.managewatermeter.fragment.DownloadDataFragment;
+import cn.eflo.managewatermeter.fragment.SettingFragment;
+import cn.eflo.managewatermeter.fragment.UploadDataFragment;
+import cn.eflo.managewatermeter.model.Operator;
+import cn.eflo.managewatermeter.util.CodeUtil;
+import cn.eflo.managewatermeter.util.WLog;
 
 public class MainActivity extends DefaultActivity
         implements NavigationView.OnNavigationItemSelectedListener {

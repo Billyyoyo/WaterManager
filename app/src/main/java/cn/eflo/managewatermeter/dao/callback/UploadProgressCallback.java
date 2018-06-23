@@ -1,4 +1,4 @@
-package cn.e_flo.managewatermeter.dao.callback;
+package cn.eflo.managewatermeter.dao.callback;
 
 public interface UploadProgressCallback {
 
