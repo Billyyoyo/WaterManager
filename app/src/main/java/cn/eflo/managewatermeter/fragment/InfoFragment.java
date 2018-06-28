@@ -79,7 +79,9 @@ public class InfoFragment extends Fragment {
         lastReadView.setText("" + info.lastMonthNum);
         lastNumView.setText("" + info.lastMonthUse);
         thisReadView.setText("" + info.thisMonthNum);
-        thisNumView.setText("" + info.thisMonthUse);
+        if (info.thisMonthNum > 0) {
+            thisNumView.setText("" + (info.thisMonthNum - info.lastMonthNum));
+        }
         caliberView.setText("" + info.waterMeterFlag);
         statusView.setText(RecordInfo.STATUSFLAGS[info.status]);
         readFlagView.setText(RecordInfo.READFLAGS[info.readFlag]);

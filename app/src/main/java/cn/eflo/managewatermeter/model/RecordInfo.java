@@ -9,8 +9,9 @@ public class RecordInfo extends Model {
 
     public final static int READFLAG_UNDO = 0;
     public final static int READFLAG_DID = 1;
+    public final static int READFLAG_UPLOAD = 2;
 
-    public final static String[] READFLAGS = {"未抄表", "已抄表"};
+    public final static String[] READFLAGS = {"未抄表", "已抄表", "已上传"};
 
     public final static int STATUS_NORMAL = 0;
     public final static int STATUS_STOP = 1;

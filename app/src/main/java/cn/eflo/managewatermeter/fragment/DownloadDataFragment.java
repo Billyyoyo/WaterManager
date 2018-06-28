@@ -8,21 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.eflo.managewatermeter.R;
 import cn.eflo.managewatermeter.dao.LocalDao;
 import cn.eflo.managewatermeter.dao.RemoteDao;
-import cn.eflo.managewatermeter.dao.callback.DownloadDataCallback;
-import cn.eflo.managewatermeter.event.DownloadCompleteEvent;
+import cn.eflo.managewatermeter.event.RemoteCompleteEvent;
 import cn.eflo.managewatermeter.event.EventBus;
-import cn.eflo.managewatermeter.model.AccountBook;
-import cn.eflo.managewatermeter.model.Operator;
-import cn.eflo.managewatermeter.model.RecordInfo;
-import cn.eflo.managewatermeter.util.WLog;
 
 public class DownloadDataFragment extends DefaultFragment {
 
@@ -34,6 +27,8 @@ public class DownloadDataFragment extends DefaultFragment {
     TextView bookCountView;
     @BindView(R.id.user_count_view)
     TextView userCountView;
+    @BindView(R.id.download_btn)
+    TextView doView;
 
     public DownloadDataFragment() {
     }
@@ -62,6 +57,10 @@ public class DownloadDataFragment extends DefaultFragment {
 
     @OnClick(R.id.download_btn)
     public void toDownload() {
+        if(doView.isSelected()){
+            EventBus.post(new RemoteCompleteEvent(RemoteCompleteEvent.DOWNLOAD));
+            return;
+        }
         new AlertDialog.Builder(getContext())
                 .setTitle("下载数据")
                 .setMessage("下载数据会清空历史数据\n您确定要继续吗?")
@@ -94,7 +93,8 @@ public class DownloadDataFragment extends DefaultFragment {
                                     messageView.setText("下载数据");
                                     userCountView.setText("用户: " + infos.size());
                                     bookCountView.setText("账本: " + books.size());
-                                    EventBus.post(new DownloadCompleteEvent());
+                                    doView.setText("完成");
+                                    doView.setSelected(true);
                                 });
                             });
                 })

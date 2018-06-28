@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import cn.eflo.managewatermeter.R;
 import cn.eflo.managewatermeter.dao.RemoteDao;
 import cn.eflo.managewatermeter.model.RemoteDBParams;
+import cn.eflo.managewatermeter.util.SystemUtil;
 
 public class SettingFragment extends DefaultFragment {
 
@@ -60,6 +61,12 @@ public class SettingFragment extends DefaultFragment {
     @OnClick(R.id.SaveSettingButton)
     public void testAndSave() {
         if (!validate()) return;
+        SystemUtil.hideSoftKeyboard(portBox);
+        SystemUtil.hideSoftKeyboard(dbnameBox);
+        SystemUtil.hideSoftKeyboard(passwordBox);
+        SystemUtil.hideSoftKeyboard(rootBox);
+        SystemUtil.hideSoftKeyboard(addressBox);
+        SystemUtil.hideSoftKeyboard(portBox);
         RemoteDao remoteDao = new RemoteDao(getContext());
         params.dbName = dbnameBox.getText().toString();
         params.address = addressBox.getText().toString();

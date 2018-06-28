@@ -17,11 +17,15 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.otto.Subscribe;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.eflo.managewatermeter.R;
 import cn.eflo.managewatermeter.dao.LocalDao;
+import cn.eflo.managewatermeter.event.EventBus;
+import cn.eflo.managewatermeter.event.RemoteCompleteEvent;
 import cn.eflo.managewatermeter.fragment.AccountBookFragment;
 import cn.eflo.managewatermeter.fragment.DownloadDataFragment;
 import cn.eflo.managewatermeter.fragment.SettingFragment;
@@ -52,6 +56,7 @@ public class MainActivity extends DefaultActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         operator = LocalDao.getCurrentOperator();
+        EventBus.register(this);
         if (operator == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -95,6 +100,23 @@ public class MainActivity extends DefaultActivity
     }
 
     @Override
+    public void onDestroy() {
+        EventBus.unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe
+    public void whenRemoteActionCompleted(RemoteCompleteEvent ev) {
+//        if(ev.action == RemoteCompleteEvent.UPLOAD){
+//            navigationView.setCheckedItem(R.id.nav_accountbook);
+//        }else{
+//            navigationView.setCheckedItem(R.id.nav_accountbook);
+//        }
+        navigationView.setCheckedItem(R.id.nav_accountbook);
+        switchMainFragment(R.id.nav_accountbook);
+    }
+
+    @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -107,6 +129,11 @@ public class MainActivity extends DefaultActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switchMainFragment(id);
+        return true;
+    }
+
+    private void switchMainFragment(int id) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.remove(currentFragment);
         if (id == R.id.nav_accountbook) {
@@ -126,7 +153,6 @@ public class MainActivity extends DefaultActivity
         transaction.show(currentFragment);
         transaction.commitNowAllowingStateLoss();
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void exitApp() {

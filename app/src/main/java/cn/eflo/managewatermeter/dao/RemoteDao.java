@@ -73,7 +73,7 @@ public class RemoteDao {
             }
             Operator result = null;
             try {
-                String key = new String(operatorName.getBytes(Charset.forName("GBK")), Charset.forName("latin1"));
+                String key = Util.toLatin1(operatorName);
                 String sql = "Select V_LoginID, V_UserName, V_Password from operator where V_UserName='" + key + "' or V_LoginID='" + key + "'";
                 Statement stmt = connection.createStatement();        //创建Statement
                 ResultSet rs = stmt.executeQuery(sql);          //ResultSet类似Cursor
@@ -81,7 +81,7 @@ public class RemoteDao {
                 if (rs.next()) {
                     result = new Operator();
                     String name = rs.getString("V_UserName");
-                    name = new String(name.getBytes(Charset.forName("latin1")), Charset.forName("GBK"));
+                    name = new String(Util.toGBK(name));
                     result.id = rs.getString("V_LoginID");
                     result.name = name;
                     result.password = rs.getString("V_Password");
@@ -108,14 +108,21 @@ public class RemoteDao {
             for (int i = 0; i < infos.size(); i++) {
                 try {
                     RecordInfo info = infos.get(i);
-                    String sql = "update metadata set Cbrq=? , Bydd=? where Yhbh=?";
+                    String sql = "insert into meterinfo (Cbyid,Cbymc,Yhbh,Zbbh,Zbmc,Srrq,Cbrq,Sydd,Bydd) values (?,?,?,?,?,now(),?,?,?)";
                     PreparedStatement pst = connection.prepareStatement(sql);
-                    pst.setString(1, info.readDate);
-                    pst.setInt(2, info.thisMonthNum);
+                    pst.setString(1, info.operatorId);
+                    pst.setString(2, info.operatorName);
                     pst.setString(3, info.userId);
+                    pst.setString(4, info.accountBookId);
+                    pst.setString(5, info.accountBookName);
+                    pst.setString(6, info.readDate);
+                    pst.setInt(7, info.lastMonthNum);
+                    pst.setInt(8, info.thisMonthNum);
                     successCount += pst.executeUpdate();
                     progressCallback.callback(successCount);
                     pst.close();
+//                    info.status = RecordInfo.READFLAG_UPLOAD;
+//                    info.save();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -148,7 +155,7 @@ public class RemoteDao {
     public List<AccountBook> getBooks(String operatorId, DownloadProgressCallback progressCallback) {
         List<AccountBook> books = new ArrayList<>();
         try {
-            String key = new String(operatorId.getBytes(Charset.forName("GBK")), Charset.forName("latin1"));
+            String key = Util.toLatin1(operatorId);
             String sql = "SELECT " +
                     "b.V_BookID as BookID," +
                     "a.V_BookName as BookName," +
@@ -170,8 +177,7 @@ public class RemoteDao {
                 AccountBook book = new AccountBook();
                 book.id = rs.getString("BookID");
                 String name = rs.getString("BookName");
-                name = new String(name.getBytes(Charset.forName("latin1")), Charset.forName("GBK"));
-                book.name = name;
+                book.name = Util.toGBK(name);
                 book.total = rs.getInt("TotalUsers");
                 book.operator = operator.id;
                 books.add(book);
@@ -192,7 +198,7 @@ public class RemoteDao {
     public List<RecordInfo> getRecords(String operatorId, DownloadProgressCallback progressCallback) {
         List<RecordInfo> records = new ArrayList<>();
         try {
-            String key = new String(operatorId.getBytes(Charset.forName("GBK")), Charset.forName("latin1"));
+            String key = Util.toLatin1(operatorId);
             String sql = "Select " +
                     "a.V_BookID as BookID, " +
                     "a.V_BookName as BookName, " +

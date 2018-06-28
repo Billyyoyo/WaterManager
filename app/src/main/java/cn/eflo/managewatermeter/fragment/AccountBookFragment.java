@@ -13,11 +13,8 @@ import com.squareup.otto.Subscribe;
 
 import cn.eflo.managewatermeter.R;
 import cn.eflo.managewatermeter.dao.LocalDao;
-import cn.eflo.managewatermeter.dao.RemoteDao;
-import cn.eflo.managewatermeter.event.DownloadCompleteEvent;
+import cn.eflo.managewatermeter.event.RemoteCompleteEvent;
 import cn.eflo.managewatermeter.event.EventBus;
-import cn.eflo.managewatermeter.model.Operator;
-import cn.eflo.managewatermeter.util.WLog;
 
 public class AccountBookFragment extends DefaultFragment {
 
@@ -64,7 +61,7 @@ public class AccountBookFragment extends DefaultFragment {
     }
 
     @Subscribe
-    public void whenDownloadComplete(DownloadCompleteEvent ev) {
+    public void whenDownloadComplete(RemoteCompleteEvent ev) {
 
     }
 

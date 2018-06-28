@@ -354,4 +354,8 @@ public class Util {
         return new String(input.getBytes(Charset.forName("latin1")), Charset.forName("GBK"));
     }
 
+    public static String toLatin1(String input){
+        return new String(input.getBytes(Charset.forName("GBK")), Charset.forName("latin1"));
+    }
+
 }

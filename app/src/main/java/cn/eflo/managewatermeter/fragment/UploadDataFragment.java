@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import cn.eflo.managewatermeter.R;
 import cn.eflo.managewatermeter.dao.LocalDao;
 import cn.eflo.managewatermeter.dao.RemoteDao;
-import cn.eflo.managewatermeter.event.DownloadCompleteEvent;
+import cn.eflo.managewatermeter.event.RemoteCompleteEvent;
 import cn.eflo.managewatermeter.event.EventBus;
 import cn.eflo.managewatermeter.model.RecordInfo;
 
@@ -28,6 +28,8 @@ public class UploadDataFragment extends DefaultFragment {
     TextView messageView;
     @BindView(R.id.info_count_view)
     TextView infoCountView;
+    @BindView(R.id.submit_btn)
+    TextView doView;
 
     List<RecordInfo> infos;
 
@@ -59,6 +61,10 @@ public class UploadDataFragment extends DefaultFragment {
 
     @OnClick(R.id.submit_btn)
     public void toUpload() {
+        if(doView.isSelected()){
+            EventBus.post(new RemoteCompleteEvent(RemoteCompleteEvent.UPLOAD));
+            return;
+        }
         new AlertDialog.Builder(getContext())
                 .setTitle("上传数据")
                 .setMessage("上传数据\n您确定要继续吗?")
@@ -67,7 +73,6 @@ public class UploadDataFragment extends DefaultFragment {
                     messageView.setVisibility(View.VISIBLE);
                     messageView.setText("正在上传数据中....");
                     infoCountView.setText("用户: 0");
-                    LocalDao.clearHistoryData();
                     RemoteDao dao = new RemoteDao(getContext());
                     dao.uploadData(infos
                             , (infoCount) -> {
@@ -82,7 +87,8 @@ public class UploadDataFragment extends DefaultFragment {
                                     progressView.setVisibility(View.INVISIBLE);
                                     infoCountView.setVisibility(View.VISIBLE);
                                     messageView.setText("上传完成");
-                                    EventBus.post(new DownloadCompleteEvent());
+                                    doView.setText("完成");
+                                    doView.setSelected(true);
                                 });
                             });
                 })
