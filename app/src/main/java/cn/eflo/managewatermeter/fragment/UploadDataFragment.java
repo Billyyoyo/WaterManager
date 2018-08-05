@@ -67,7 +67,7 @@ public class UploadDataFragment extends DefaultFragment {
         }
         new AlertDialog.Builder(getContext())
                 .setTitle("上传数据")
-                .setMessage("上传数据\n您确定要继续吗?")
+                .setMessage("警告：上传数据将已经抄表的数据上传给服务器，请尽可能在WIFI环境下上传，如没有WIFI请确认手机信号完好！\n\n您确定要继续吗?")
                 .setPositiveButton("确定", (dialog, which) -> {
                     progressView.setVisibility(View.VISIBLE);
                     messageView.setVisibility(View.VISIBLE);

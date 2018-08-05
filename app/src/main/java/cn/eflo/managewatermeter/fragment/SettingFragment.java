@@ -48,7 +48,7 @@ public class SettingFragment extends DefaultFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle) {
         RemoteDao remoteDao = new RemoteDao(getContext());
         params = remoteDao.getDBParams();
         dbnameBox.setText(params.dbName);
@@ -75,15 +75,15 @@ public class SettingFragment extends DefaultFragment {
         params.password = passwordBox.getText().toString();
         remoteDao.saveDBParams(params);
         showProgress("连接中...");
-        CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(()->{
+        CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> {
             if (remoteDao.connect()) {
                 remoteDao.disconnect();
                 return true;
             }
             return false;
         });
-        future.thenAccept(ret->{
-            getActivity().runOnUiThread(()->{
+        future.thenAccept(ret -> {
+            getActivity().runOnUiThread(() -> {
                 dismissProgress();
                 if (ret) {
                     Snackbar.make(portBox, "连接成功", Snackbar.LENGTH_SHORT).show();

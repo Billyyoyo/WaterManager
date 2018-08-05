@@ -24,14 +24,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="户号："
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/UserIDTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="1234567890"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -40,19 +41,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="表号："
-                android:textSize="18sp" />
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/MeterIDTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="111dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="1234567890"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
@@ -61,19 +65,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="户名："
-            android:textSize="18sp"/>
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/UserNameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="277dp"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text="广西南宁水务集团"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,63 +88,78 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="地址："
-            android:textSize="18sp"/>
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/AddressTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="276dp"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text="南宁市郎东区东盟大道123号"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="上次读数："
-                android:textSize="18sp"/>
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/LastReadTextView"
-                android:layout_width="match_parent"
+                android:layout_width="96dp"
                 android:layout_height="wrap_content"
-                android:text="01234567"
-                android:textSize="18sp"
+                android:singleLine="true"
+                android:text="1234567"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用水量："
-                android:textSize="18sp" />
+                android:text="水量："
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/LastNumTextView"
-                android:layout_width="86dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:text="01234567"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:singleLine="true"
+                android:text="0123456"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
@@ -146,45 +168,62 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="本次读数："
-                android:textSize="18sp"/>
+                android:textSize="16sp" />
+
             <EditText
                 android:id="@+id/NewReadEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="98dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
                 android:ems="10"
-                android:hint="输入读数"
+                android:hint="抄录数"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:textStyle="bold"/>
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@android:color/holo_blue_light"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用水量："
-                android:textSize="18sp"/>
+                android:text="水量："
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/ThisNumtextView"
-                android:layout_width="match_parent"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:text="01234567"
-                android:textSize="18sp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -199,19 +238,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="表径："
-                android:textSize="18sp"/>
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/CaliberTextView"
-                android:layout_width="match_parent"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="100"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -219,19 +261,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="状态："
-                android:textSize="18sp"/>
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/StatusTextView"
-                android:layout_width="match_parent"
+                android:layout_width="58dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="正常"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -239,12 +284,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/ReadFlagTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="未抄表"
-                android:textSize="18sp"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -255,18 +303,21 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用水类型："
-            android:textSize="18sp" />
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/WaterTypeTextView"
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text="居民阶梯1 居民阶梯2"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -276,33 +327,36 @@
         android:layout_marginTop="6dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="账本名称："
-            android:textSize="18sp" />
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/BookNameTextView"
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:text="(012)世纪新城1本"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="visible" />
 
     </LinearLayout>
 
     <View
+        android:layout_width="331dp"
+        android:layout_height="1dp"
         android:layout_margin="16dp"
         android:background="#eeeeee"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="保存"/>
+        android:text="保存" />
 
 </LinearLayout>

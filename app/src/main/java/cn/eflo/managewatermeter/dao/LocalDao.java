@@ -30,6 +30,10 @@ public class LocalDao {
         return new Select().from(AccountBook.class).where("operator=?", getCurrentOperator().id).execute();
     }
 
+    public static AccountBook getAccountBook(String bookId){
+        return new Select().from(AccountBook.class).where("operator=? and bid=?", getCurrentOperator().id, bookId).executeSingle();
+    }
+
     public static List<RecordInfo> getRecordInfos(String bookId){
         return new Select().from(RecordInfo.class).where("Zbbh=?", bookId).execute();
     }

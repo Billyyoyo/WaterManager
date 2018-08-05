@@ -78,9 +78,9 @@ public class AccountBookAdapter extends RecyclerView.Adapter<AccountBookAdapter.
             if (mBook.name != null) {
                 mNameView.setText(mBook.name);
             }
-            totalView.setText("用户总数 " + mBook.total);
-            completeView.setText("已抄表户数 " + mBook.complete);
-            undoView.setText("未抄表户数 " + (mBook.total - mBook.complete));
+            totalView.setText("总户数 " + mBook.total);
+            completeView.setText("已抄表 " + mBook.complete);
+            undoView.setText("未抄表 " + (mBook.total - mBook.complete));
         }
 
         @OnClick(R.id.book_item_view)

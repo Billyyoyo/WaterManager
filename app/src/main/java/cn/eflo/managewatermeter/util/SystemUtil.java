@@ -100,7 +100,7 @@ public class SystemUtil {
         }
     }
 
-    public static String getApplicationMetaData(Context context, String name) {
+    public static String getApplicationMetaString(Context context, String name) {
         try {
             ApplicationInfo appInfo = context.getPackageManager()
                     .getApplicationInfo(context.getPackageName(),
@@ -109,6 +109,18 @@ public class SystemUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    public static String getApplicationMetaInt(Context context, String name) {
+        try {
+            ApplicationInfo appInfo = context.getPackageManager()
+                    .getApplicationInfo(context.getPackageName(),
+                            PackageManager.GET_META_DATA);
+            return appInfo.metaData.getInt(name)+"";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "3306";
         }
     }
 

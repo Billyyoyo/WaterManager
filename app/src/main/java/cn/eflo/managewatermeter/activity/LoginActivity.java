@@ -1,12 +1,18 @@
 package cn.eflo.managewatermeter.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.widget.EditText;
+
+import com.activeandroid.query.Select;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +24,7 @@ import cn.eflo.managewatermeter.model.Operator;
 import cn.eflo.managewatermeter.util.CodeUtil;
 import cn.eflo.managewatermeter.util.Constant;
 import cn.eflo.managewatermeter.util.SystemUtil;
+import cn.eflo.managewatermeter.util.WLog;
 
 public class LoginActivity extends DefaultActivity {
 
@@ -43,11 +50,7 @@ public class LoginActivity extends DefaultActivity {
     @Override
     public void onPostCreate(Bundle bundle) {
         super.onPostCreate(bundle);
-        Operator current = LocalDao.getCurrentOperator();
-        if (current != null) {
-            usernameBox.setText(current.name);
-            passwordBox.setText(current.password);
-        }
+        usernameBox.setText(readLastLoginUser());
     }
 
     @Override
@@ -79,6 +82,7 @@ public class LoginActivity extends DefaultActivity {
                     LocalDao.resetOperatorsFlag();
                     operator.flag = Operator.FLAG_LOGGED;
                     operator.save();
+                    cacheLastLoginUser(usernameBox.getText().toString());
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 } else {
@@ -87,6 +91,18 @@ public class LoginActivity extends DefaultActivity {
             });
         });
 
+    }
+
+    private void cacheLastLoginUser(String loginName) {
+        SharedPreferences settings = getSharedPreferences("db_params", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("LastLoginUser", loginName);
+        editor.commit();
+    }
+
+    private String readLastLoginUser() {
+        SharedPreferences settings = getSharedPreferences("db_params", Context.MODE_PRIVATE);
+        return settings.getString("LastLoginUser", "");
     }
 
     @OnClick(R.id.SettingButton)

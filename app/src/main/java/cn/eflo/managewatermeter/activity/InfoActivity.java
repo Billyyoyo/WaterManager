@@ -82,6 +82,7 @@ public class InfoActivity extends DefaultActivity {
         getMenuInflater().inflate(R.menu.menu_info, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint("搜索户号、表号或户名…");
         searchView.setInputType(EditorInfo.TYPE_CLASS_TEXT);
         searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

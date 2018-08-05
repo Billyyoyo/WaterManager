@@ -63,7 +63,7 @@ public class DownloadDataFragment extends DefaultFragment {
         }
         new AlertDialog.Builder(getContext())
                 .setTitle("下载数据")
-                .setMessage("下载数据会清空历史数据\n您确定要继续吗?")
+                .setMessage("警告：下载数据会清空已经抄表的数据和历史数据，请确认目前抄表的数据已经上传完毕或需要开始新一轮抄表工作才需要下载！ \n\n您确定要继续吗?")
                 .setPositiveButton("确定", (dialog, which) -> {
                     progressView.setVisibility(View.VISIBLE);
                     userCountView.setVisibility(View.VISIBLE);

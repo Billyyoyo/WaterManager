@@ -43,7 +43,6 @@ public class AccountBookFragment extends DefaultFragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        adapter.setData(LocalDao.getAccountBooks());
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -60,9 +59,19 @@ public class AccountBookFragment extends DefaultFragment {
 //        });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        refreshData();
+    }
+
     @Subscribe
     public void whenDownloadComplete(RemoteCompleteEvent ev) {
 
+    }
+
+    private void refreshData(){
+        adapter.setData(LocalDao.getAccountBooks());
     }
 
     @Override

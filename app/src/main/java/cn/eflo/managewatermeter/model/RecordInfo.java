@@ -30,7 +30,7 @@ public class RecordInfo extends Model {
     public String waterMeterId;    //水表编号
 
     @Column(name = "Sbbj")
-    public int waterMeterFlag;    //水表编号
+    public int waterMeterFlag;    //水表标记
 
     @Column(name = "Zbbh")
     public String accountBookId;    //账户编号

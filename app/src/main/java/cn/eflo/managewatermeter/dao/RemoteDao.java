@@ -3,7 +3,6 @@ package cn.eflo.managewatermeter.dao;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,6 +24,9 @@ import cn.eflo.managewatermeter.model.AccountBook;
 import cn.eflo.managewatermeter.model.Operator;
 import cn.eflo.managewatermeter.model.RecordInfo;
 import cn.eflo.managewatermeter.model.RemoteDBParams;
+import cn.eflo.managewatermeter.util.CodeUtil;
+import cn.eflo.managewatermeter.util.DateUtil;
+import cn.eflo.managewatermeter.util.SystemUtil;
 import cn.eflo.managewatermeter.util.Util;
 import cn.eflo.managewatermeter.util.WLog;
 
@@ -108,16 +110,19 @@ public class RemoteDao {
             for (int i = 0; i < infos.size(); i++) {
                 try {
                     RecordInfo info = infos.get(i);
-                    String sql = "insert into meterinfo (Cbyid,Cbymc,Yhbh,Zbbh,Zbmc,Srrq,Cbrq,Sydd,Bydd) values (?,?,?,?,?,now(),?,?,?)";
+                    String sql = "insert into meterinfo (Cbyid,Cbymc,Yhbh,Zbbh,Zbmc,Srrq,Cbrq,Sydd,Bydd,Sbbh,Yhhm,Cbbz) values (?,?,?,?,?,now(),?,?,?,?,?,?)";
                     PreparedStatement pst = connection.prepareStatement(sql);
                     pst.setString(1, info.operatorId);
-                    pst.setString(2, info.operatorName);
+                    pst.setString(2, Util.toLatin1(info.operatorName));
                     pst.setString(3, info.userId);
                     pst.setString(4, info.accountBookId);
-                    pst.setString(5, info.accountBookName);
+                    pst.setString(5, Util.toLatin1(info.accountBookName));
                     pst.setString(6, info.readDate);
                     pst.setInt(7, info.lastMonthNum);
                     pst.setInt(8, info.thisMonthNum);
+                    pst.setString(9, info.waterMeterId);
+                    pst.setString(10, Util.toLatin1(info.userName));
+                    pst.setInt(11, info.readFlag);
                     successCount += pst.executeUpdate();
                     progressCallback.callback(successCount);
                     pst.close();
@@ -203,6 +208,7 @@ public class RemoteDao {
                     "a.V_BookID as BookID, " +
                     "a.V_BookName as BookName, " +
                     "a.V_UserID as UserID, " +
+                    "a.V_Postcode as PostCode, " +
                     "a.V_UserName as UserName, " +
                     "a.V_Address as Address, " +
                     "a.N_LastMeterNum as LastMeterNum, " +
@@ -229,27 +235,50 @@ public class RemoteDao {
                 record.accountBookId = rs.getString("BookID");
                 record.accountBookName = Util.toGBK(rs.getString("BookName"));
                 record.userId = rs.getString("UserID");
+                record.waterMeterId = rs.getString("PostCode");
                 record.userName = Util.toGBK(rs.getString("UserName"));
                 record.userAddress = Util.toGBK(rs.getString("Address"));
                 record.lastMonthNum = rs.getInt("LastMeterNum");
+                record.lastMonthUse = getLastWaterUsed(record.userId);
                 record.waterMeterFlag = rs.getInt("Caliber");
                 record.status = rs.getInt("UserStatus");
                 record.useType = Util.toGBK(rs.getString("WaterTypeName"));
                 record.operatorId = operator.id;
                 record.operatorName = operator.name;
                 records.add(record);
-                WLog.i(TAG, "Record: " + record.accountBookName + "  " + record.userName + "  " + record.lastMonthNum);
+//                WLog.i(TAG, "Record: " + record.accountBookName + "  " + record.userId + "  " + record.userName);
                 record.save();
                 if (progressCallback != null) {
                     progressCallback.callback(0, records.size());
                 }
             }
+            stmt.close();
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
             records = null;
         }
         return records;
+    }
+
+    private int getLastWaterUsed(String userId) {
+        String sql = "Select N_UseNum from usewaterinfo where V_UserID='" + userId + "' order by D_ReadDate  desc limit 1";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            int lastUseNum = 0;
+            if (rs.next()) {
+                lastUseNum = rs.getInt("N_UseNum");
+//                WLog.i("LastUse", lastUseNum + "");
+            } else {
+//                WLog.i("LastUse", "no");
+            }
+            stmt.close();
+            return lastUseNum;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public void getAccountBooks(String operatorId, AccountBooksCallback callback) {
@@ -288,13 +317,21 @@ public class RemoteDao {
     }
 
     public RemoteDBParams getDBParams() {
-        RemoteDBParams params = new RemoteDBParams();
         SharedPreferences settings = context.getSharedPreferences("db_params", Context.MODE_PRIVATE);
-        params.dbName = settings.getString("dbname", "");
-        params.address = settings.getString("address", "");
-        params.port = settings.getString("port", "");
-        params.root = settings.getString("root", "");
-        params.password = settings.getString("password", "");
+        RemoteDBParams params = new RemoteDBParams();
+        if (settings.contains("dbname")) {
+            params.dbName = settings.getString("dbname", "");
+            params.address = settings.getString("address", "");
+            params.port = settings.getString("port", "");
+            params.root = settings.getString("root", "");
+            params.password = settings.getString("password", "");
+        } else {
+            params.dbName = SystemUtil.getApplicationMetaString(context, "DBNAME");
+            params.address = SystemUtil.getApplicationMetaString(context, "ADDRESS");
+            params.port = SystemUtil.getApplicationMetaInt(context, "PORT");
+            params.root = SystemUtil.getApplicationMetaString(context, "LOGINNAME");
+            params.password = SystemUtil.getApplicationMetaString(context, "PASSWORD");
+        }
         return params;
     }
 

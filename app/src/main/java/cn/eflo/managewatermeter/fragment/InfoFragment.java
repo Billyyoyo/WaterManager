@@ -2,8 +2,10 @@ package cn.eflo.managewatermeter.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.eflo.managewatermeter.R;
 import cn.eflo.managewatermeter.activity.InfoActivity;
+import cn.eflo.managewatermeter.dao.LocalDao;
+import cn.eflo.managewatermeter.model.AccountBook;
 import cn.eflo.managewatermeter.model.RecordInfo;
 import cn.eflo.managewatermeter.util.DateUtil;
+import cn.eflo.managewatermeter.util.SystemUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +57,8 @@ public class InfoFragment extends Fragment {
     @BindView(R.id.BookNameTextView)
     TextView bookNameView;
 
+    private View contentView;
+
     public InfoFragment() {
         // Required empty public constructor
     }
@@ -65,8 +72,9 @@ public class InfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_info, container, false);
+        contentView = inflater.inflate(R.layout.fragment_info, container, false);
         ButterKnife.bind(this, contentView);
+        contentView.setOnClickListener(v -> SystemUtil.hideSoftKeyboard(thisReadView));
         return contentView;
     }
 
@@ -78,9 +86,11 @@ public class InfoFragment extends Fragment {
         userAddressView.setText(info.userAddress);
         lastReadView.setText("" + info.lastMonthNum);
         lastNumView.setText("" + info.lastMonthUse);
-        thisReadView.setText("" + info.thisMonthNum);
+        if (info.readFlag != RecordInfo.READFLAG_UNDO) {
+            thisReadView.setText("" + info.thisMonthNum);
+        }
         if (info.thisMonthNum > 0) {
-            thisNumView.setText("" + (info.thisMonthNum - info.lastMonthNum));
+            thisNumView.setText("" + info.thisMonthUse);
         }
         caliberView.setText("" + info.waterMeterFlag);
         statusView.setText(RecordInfo.STATUSFLAGS[info.status]);
@@ -91,18 +101,27 @@ public class InfoFragment extends Fragment {
 
     @OnClick(R.id.save_button)
     public void toSave() {
-        new AlertDialog.Builder(getContext())
-                .setTitle("提示")
-                .setMessage("是否保存数据")
-                .setPositiveButton("确定", (dialog, which) -> {
-                    info.thisMonthNum = Integer.parseInt(thisReadView.getText().toString());
-                    info.readFlag = RecordInfo.READFLAG_DID;
-                    info.readDate = DateUtil.getToday();
-                    info.save();
-                    readFlagView.setText(RecordInfo.READFLAGS[RecordInfo.READFLAG_DID]);
-                })
-                .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
-                .show();
+        if (TextUtils.isEmpty(thisReadView.getText().toString())) {
+            Snackbar.make(thisReadView, "请输入正确的读数", Snackbar.LENGTH_SHORT).show();
+        } else {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("提示")
+                    .setMessage("是否保存数据")
+                    .setPositiveButton("确定", (dialog, which) -> {
+                        info.thisMonthNum = Integer.parseInt(thisReadView.getText().toString());
+                        info.thisMonthUse = (info.thisMonthNum > info.lastMonthNum) ? info.thisMonthNum - info.lastMonthNum : 0;
+                        info.readFlag = RecordInfo.READFLAG_DID;
+                        info.readDate = DateUtil.getToday();
+                        info.save();
+                        readFlagView.setText(RecordInfo.READFLAGS[RecordInfo.READFLAG_DID]);
+                        AccountBook book = LocalDao.getAccountBook(info.accountBookId);
+                        book.complete = book.complete + 1;
+                        book.save();
+                        thisNumView.setText("" + (info.thisMonthNum - info.lastMonthNum));
+                    })
+                    .setNegativeButton("取消", (dialog, which) -> dialog.dismiss())
+                    .show();
+        }
     }
 
 }
